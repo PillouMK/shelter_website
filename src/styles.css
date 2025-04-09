@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import "primeicons/primeicons.css";
+@plugin "tailwindcss-primeui";
+@font-face {
+  font-family: Dosis;
+  font-display: swap;
+  src: url('/assets/fonts/Dosis-VariableFont_wght.ttf') format('truetype');
+}
+
+@theme {
+  --font-sans: "Dosis", "sans-serif";
+  --color-primary-50: '#9F496E';
+  --color-primary-100: '#F38071';
+  --color-hover-50: '#8A3D5D';
+  --color-hover-100: '#EF6B5C';
+  --color-active-50: '#7A334F';
+  --color-active-100: '#E95A49';
+}
+/*Ne pas enlever c'est pour center les items du header*/
+
+p-menubarsub {
+  width: 100%;
+  display: flex;
+  .p-menubar-root-list {
+    width: 100%;
+    justify-content: center;
+  }
+}
+/*Ne pas enlever c'est pour enlever le + du panel*/
+.p-panel {
+  border: none;
+}
+
+.p-panel .p-panel-header-icon.p-panel-toggler .p-icon {
+  display: none !important;
+}
+
+.p-panel .p-panel-header {
+  margin: 0;
+  padding: 0;
+}
+
+.p-panel .p-panel-content {
+  padding: 0;
+}
