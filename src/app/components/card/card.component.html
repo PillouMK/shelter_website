@@ -1,0 +1,55 @@
+<div *ngIf="orientation=='vertical'" class="w-54 cursor-pointer ">
+  <div class="flex justify-center translate-y-1/2">
+    <p-avatar
+      [image]="'/assets/img/' + getAvatarImage(avatar)"
+      class="w-32 h-32"
+      shape="circle"
+    />
+  </div>
+  <p-card styleClass="pt-14">
+    <ng-template #title>
+      <span class="font-bold w-full flex justify-center">
+        {{card_title}}
+      </span>
+    </ng-template>
+    <ng-template #content>
+       <p *ngIf="showContent" class="leading-none my-4 line-clamp-5 h-20">
+         {{card_content}}
+       </p>
+    </ng-template>
+    <ng-template #footer>
+      <div *ngIf="showContent" class="flex w-full justify-between items-end">
+        <span class="text-xs text-tertiary">{{formatToFrench(date)}}</span>
+        <span [ngClass]="type == 'text' ? 'pi pi-book' : 'pi pi-microphone'" style="font-size: 1.5rem"></span>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
+<div *ngIf="orientation=='horizontal'" class="w-full flex justify-center items-center cursor-pointer">
+  <div class="flex justify-center translate-x-1/2">
+    <p-avatar
+      [image]="'/assets/img/' + getAvatarImage(avatar)"
+      class="w-48 h-48"
+      shape="circle"
+    />
+  </div>
+  <div class="flex justify-center items-center w-[60%]">
+    <p-card styleClass="pl-22">
+      <ng-template #title>
+      <span class="font-bold w-full flex justify-start text-2xl text-secondary">
+        {{ card_title }}
+      </span>
+      </ng-template>
+      <ng-template #content>
+        <p class="leading-5 my-4 line-clamp-6 ">
+          {{card_content}}
+        </p>
+      </ng-template>
+      <ng-template #footer>
+        <div class="flex w-full justify-end">
+          <span class="text-xs text-tertiary">{{formatToFrench(date)}}</span>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>

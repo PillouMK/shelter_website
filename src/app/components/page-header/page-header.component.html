@@ -1,0 +1,9 @@
+<div class="bg-white text-secondary w-full flex h-full items-end text-center 2xl:text-left justify-center">
+  <div class="h-full items-center p-20">
+    <h1 class="font-extrabold text-5xl ">{{ title }}</h1>
+    <p class="leading-none font-normal text-2xl mt-3">{{description}}</p>
+  </div>
+  <img *ngIf="image_number == 0" src="/assets/img/six-women-circle.svg" class="hidden 2xl:block h-72 mr-10"/>
+  <img *ngIf="image_number == 1" src="/assets/img/four-womens-row.svg" class="hidden 2xl:block h-48 mt-24"/>
+  <img *ngIf="image_number == 2" src="/assets/img/two-women-scpeaking.svg" class="hidden 2xl:block h-72 mr-10"/>
+</div>

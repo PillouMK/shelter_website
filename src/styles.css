@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
 @plugin "tailwindcss-primeui";
+@plugin "@tailwindcss/typography";
 @font-face {
   font-family: Dosis;
   font-display: swap;
@@ -9,13 +10,16 @@
 
 @theme {
   --font-sans: "Dosis", "sans-serif";
-  --color-primary-50: '#9F496E';
-  --color-primary-100: '#F38071';
-  --color-hover-50: '#8A3D5D';
-  --color-hover-100: '#EF6B5C';
-  --color-active-50: '#7A334F';
-  --color-active-100: '#E95A49';
+  --color-primary: #F38071;
+  --color-primary-hover: #EF6B5C;
+  --color-primary-active: #E95A49;
+  --color-secondary: #9F496E;
+  --color-secondary-hover: #8A3F5F;
+  --color-secondary-active: #7A3553;
+  --color-tertiary: #727272;
+  --color-background: #FCF1F5;
 }
+
 /*Ne pas enlever c'est pour center les items du header*/
 
 p-menubarsub {
@@ -29,6 +33,7 @@ p-menubarsub {
 /*Ne pas enlever c'est pour enlever le + du panel*/
 .p-panel {
   border: none;
+  background-color: var(--color-background);
 }
 
 .p-panel .p-panel-header-icon.p-panel-toggler .p-icon {

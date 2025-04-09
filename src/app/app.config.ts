@@ -10,12 +10,14 @@ import {environment} from './environments/environment';
 import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {FIREBASE_OPTIONS} from '@angular/fire/compat';
+import { provideMarkdown } from 'ngx-markdown';
 
 const app = initializeApp(environment.firebase);
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
+    provideMarkdown(),
     provideFirebaseApp(() => app),
     provideFirestore(() => getFirestore(app)),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },

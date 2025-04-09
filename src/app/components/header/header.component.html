@@ -1,13 +1,18 @@
-<div>
+<div class="fixed w-full z-50">
   <p-menubar [model]="items" styleClass="pr-0 mb-4">
     <ng-template pTemplate="start">
       <img src="../../../assets/img/logo-color.svg" routerLink="/" class="w-40" alt="Logo de l'association"/>
     </ng-template>
     <ng-template pTemplate="end">
-      <p-button label="Quitter rapidement" styleClass="rounded-r-none rounded-l-full w-38 text-center bg-primary-50"  />
+      <p-button
+        label="Quitter rapidement"
+        styleClass="rounded-r-none rounded-l-full w-38 text-center bg-primary hover:bg-primary-hover active:bg-primary-active"
+      />
     </ng-template>
   </p-menubar>
-  <div class="w-full flex justify-center mb-4">
+  <div
+    class="w-full flex justify-center mb-4 transition-all duration-200 ease-in-out"
+    [ngClass]="{'transform -translate-y-full opacity-0': scrollToBottom, 'transform translate-y-0 opacity-100': !scrollToBottom}">
     <p-iconfield class="w-full mx-[35%]">
       <p-inputicon styleClass="pi pi-search" />
       <input type="text" pInputText placeholder="Search" class="w-full rounded-full"/>

@@ -1,4 +1,6 @@
 import {TimestampDate} from "timestamp-date";
+import {format} from 'date-fns';
+import {fr} from 'date-fns/locale';
 
 export const parseDate = (dateValue: any): Date => {
   const timestampDate = new TimestampDate();
@@ -11,3 +13,7 @@ export const parseDate = (dateValue: any): Date => {
   // Sinon c'est un timestamp, utiliser la fonction existante
   return new Date(timestampDate.timestampToDate(dateValue));
 };
+
+export const formatToFrench = (date: Date): string => {
+  return format(date, "dd MMMM yyyy 'à' HH'h'mm", { locale: fr })
+}

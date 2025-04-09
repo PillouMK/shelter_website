@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class FooterComponent  {
-  isCollapsed = true;
+  isCollapsed = false;
 
   onCollapseChange(value : boolean){
     this.isCollapsed = value;
