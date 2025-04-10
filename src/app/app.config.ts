@@ -8,7 +8,7 @@ import ShelterPreset from './theme/shelter.theme';
 import {provideHttpClient} from '@angular/common/http';
 import {environment} from './environments/environment';
 import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
-import {getFirestore, provideFirestore} from '@angular/fire/firestore';
+import {enableIndexedDbPersistence, getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {FIREBASE_OPTIONS} from '@angular/fire/compat';
 import { provideMarkdown } from 'ngx-markdown';
 

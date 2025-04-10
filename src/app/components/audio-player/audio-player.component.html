@@ -1,13 +1,6 @@
-<div *ngIf="orientation=='horizontal'" class="mx-30">
-  <div class="flex w-full justify-end">
-    <p-avatar
-      [image]="'/assets/img/' + getAvatarImage(avatar)"
-      class="w-48 h-48 fixed mt-5 mr-10"
-      shape="circle"
-    />
-  </div>
-  <p-card>
-    <ng-template #title>
+<div *ngIf="orientation=='horizontal'" class="bg-white flex w-full justify-between items-center p-5 rounded-2xl shadow">
+  <div class="flex flex-col w-full h-full justify-between mx-5">
+    <div>
       <div class="flex items-center gap-3">
         <p-button *ngIf="!this.wavesurfer?.isPlaying()" icon="pi pi-play-circle cursor-pointer text-tertiary-50 text-3xl" [rounded]="true" [text]="true" (onClick)="this.wavesurfer?.play()" />
         <p-button *ngIf="this.wavesurfer?.isPlaying()" icon="pi pi-pause-circle cursor-pointer text-tertiary-50 text-3xl" [rounded]="true" [text]="true" (onClick)="this.wavesurfer?.pause()" />
@@ -15,13 +8,13 @@
       </div>
       <span *ngIf="!isLoading && this.wavesurfer" class="text-tertiary text-xs ml-8">{{formatTimeMMSS(this.wavesurfer.getCurrentTime())}} / {{formatTimeMMSS(this.wavesurfer.getDuration())}}</span>
       <span *ngIf="isLoading" class="text-tertiary text-xs ml-8">Chargement en cours...</span>
-    </ng-template>
-    <ng-template #content>
-      <div #waveform class="w-[80%]" [ngClass]="isLoading ? 'hidden' : 'block'"></div>
-      <p-progressbar *ngIf="isLoading" styleClass="mb-10" [value]="loadingProgress" [style]="{ width: '80%' }" ></p-progressbar>
-    </ng-template>
-    <ng-template #footer>
-      <div class="flex w-[80%] justify-between">
+    </div>
+    <div>
+      <div #waveform [ngClass]="isLoading ? 'hidden' : 'block'"></div>
+      <p-progressbar *ngIf="isLoading" styleClass="mb-10" [value]="loadingProgress"></p-progressbar>
+    </div>
+    <div>
+      <div class="flex w-full justify-between">
         <div>
           <p-button icon="pi pi-fast-backward text-black" [rounded]="true" [text]="true" (onClick)="back(10)" />
           <p-button icon="pi pi-fast-forward text-black" [rounded]="true" [text]="true" (onClick)="skip(10)" />
@@ -29,9 +22,18 @@
         <div>
           <p-button icon="pi pi-share-alt text-tertiary-50 text-2xl" [rounded]="true" [text]="true" />
         </div>
-      </div>
-    </ng-template>
-  </p-card>
+    </div>
+
+
+  </div>
+  </div>
+  <div class="h-full items-center flex">
+    <p-avatar
+      [image]="'/assets/img/' + getAvatarImage(avatar)"
+      class="w-48 h-48 mr-5"
+      shape="circle"
+    />
+  </div>
 </div>
 <div *ngIf="orientation=='vertical'" class="w-54 cursor-pointer ">
   <div class="flex justify-center translate-y-1/2">

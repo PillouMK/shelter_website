@@ -12,7 +12,7 @@ export class Testimony {
   status: ArticleStatus;
   created_at: Date;
   updated_at: Date;
-  published_at: Date | null;
+  published_at: Date;
 
   constructor(
     id: string,
@@ -25,7 +25,7 @@ export class Testimony {
     status: ArticleStatus,
     created_at: Date,
     updated_at: Date,
-    published_at: Date | null = null
+    published_at: Date
   ) {
     this.id = id;
     this.title = title;
@@ -48,11 +48,11 @@ export class Testimony {
       json.summary,
       json.author,
       json.image,
-      json.audio_url,
+      json.audio,
       json.status,
       parseDate(json.created_at),
       parseDate(json.updated_at),
-      json.published_at ? parseDate(json.published_at) : null
+      parseDate(json.published_at)
     );
   }
 }
