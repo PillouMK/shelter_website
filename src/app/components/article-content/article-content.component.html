@@ -1,11 +1,11 @@
-<div class="flex justify-center translate-y-1/2 mt-20">
+<div class="flex justify-center translate-y-1/2">
   <p-avatar
     [image]="'/assets/img/' + getAvatarImage(avatar)"
     class="w-42 h-42"
     shape="circle"
   />
 </div>
-<div class="bg-background px-20">
+<div class="bg-background px-40">
   <p-card styleClass="pt-20">
     <ng-template #title>
       <span class="font-bold w-full flex justify-center text-sm text-black">
@@ -13,7 +13,7 @@
       </span>
     </ng-template>
     <ng-template #content>
-      <div class="p-10">
+      <div class="px-20 py-10">
         <markdown ngPreserveWhitespaces class="prose" [data]="card_content"></markdown>
       </div>
     </ng-template>

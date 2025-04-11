@@ -1,4 +1,4 @@
-<div *ngIf="orientation=='vertical'" class="w-54 cursor-pointer">
+<div *ngIf="orientation=='vertical'" class="w-72 cursor-pointer">
   <div class="flex justify-center translate-y-1/2">
     <p-avatar
       [image]="'/assets/img/' + getAvatarImage(avatar)"
@@ -9,13 +9,13 @@
   <p-card styleClass="pt-14 hover:bg-tertiary-200 active:bg-tertiary-300">
     <ng-template #title>
       <div class="w-full flex justify-center">
-        <p class="font-bold line-clamp-1 max-w-full">
+        <p class="font-bold max-w-full text-center line-clamp-2">
           {{card_title}}
         </p>
       </div>
     </ng-template>
     <ng-template #content>
-       <p *ngIf="showContent" class="leading-none my-4 line-clamp-5 h-20">
+       <p *ngIf="showContent" class="leading-none h-20 line-clamp-6 my-4">
          {{card_content}}
        </p>
     </ng-template>

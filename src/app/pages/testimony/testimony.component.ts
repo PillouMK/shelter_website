@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PageHeaderComponent} from '../../components/page-header/page-header.component';
 import {Testimony} from '../../models/Testimony.class';
 import {TestimonyService} from '../../services/testimony.service';
 import { CommonModule } from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AudioPlayerComponent} from '../../components/audio-player/audio-player.component';
 import { CarouselModule } from 'primeng/carousel';
+import {CardComponent} from '../../components/card/card.component';
+import {ArticleContentComponent} from '../../components/article-content/article-content.component';
 
 @Component({
   selector: 'app-testimony',
@@ -13,14 +15,17 @@ import { CarouselModule } from 'primeng/carousel';
     PageHeaderComponent,
     CommonModule,
     AudioPlayerComponent,
-    CarouselModule
+    CarouselModule,
+    CardComponent,
+    ArticleContentComponent
   ],
   templateUrl: './testimony.component.html'
 })
 export class TestimonyComponent implements OnInit {
 
+  @ViewChild('scrollTarget', { static: true }) scrollTarget!: ElementRef;
   testimony: Testimony | null = null;
-  audioTestimonies: Testimony[] = [];
+  testimonies: Testimony[] = [];
   responsiveOptions: any[] = [
     {
       breakpoint: '1400px',
@@ -47,20 +52,36 @@ export class TestimonyComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service:TestimonyService,
+    private router: Router,
   ) {}
+
+  goToId(id:string) {
+    this.router.navigate(['/testimonies', id]);
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['testimonyId'];
+      this.scrollToElementById('targetElementId');
       this.loadTestimony(id);
-      this.loadAudioTestimonies(id);
     });
+  }
+
+  scrollToElementById(id: string): void {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
   }
 
   loadTestimony(id:string) {
     this.service.getTestimonyById(id).subscribe({
       next: (testimony:Testimony | null) => {
         this.testimony = testimony;
+        this.loadTestimonies(id);
       },
       error: (e: any) => {
         console.log(e);
@@ -68,10 +89,13 @@ export class TestimonyComponent implements OnInit {
     });
   }
 
-  loadAudioTestimonies(id:string) {
-    this.service.fetchAudioTestimonies(id).subscribe({
+  loadTestimonies(id:string) {
+    const type = this.testimony?.audio_url ? 'audio': 'text';
+    console.log(type);
+    console.log(this.testimony?.audio_url);
+    this.service.fetchTestimonies(id,type).subscribe({
       next: (testimony:Testimony[]) => {
-        this.audioTestimonies = testimony;
+        this.testimonies = testimony;
       },
       error: (e: any) => {
         console.log(e);

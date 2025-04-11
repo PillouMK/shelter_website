@@ -44,7 +44,7 @@ export class TestimoniesComponent implements OnInit {
   }
 
   loadTestimonies() {
-    this.service.fetchTestimonies().subscribe({
+    this.service.fetchTestimonies(null,null).subscribe({
       next: (testimonies:Testimony[]) => {
         this.testimonies = testimonies;
         this.distributeItems();

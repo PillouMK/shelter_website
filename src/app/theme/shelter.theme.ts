@@ -11,6 +11,14 @@ const ShelterPreset = definePreset(Aura, {
           inverseColor: '#ffffff',
           hoverColor: 'var(--color-primary-hover)',
           activeColor: 'var(--color-primary-active)',
+        },
+      },
+      dark: {
+        primary: {
+          color: 'var(--color-primary)',
+          inverseColor: '#ffffff',
+          hoverColor: 'var(--color-primary-hover)',
+          activeColor: 'var(--color-primary-active)',
         }
       }
     }

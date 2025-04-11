@@ -12,43 +12,22 @@ export class TestimonyService {
   private readonly storageKey = 'testimony';
   private environmentInjector  = inject(EnvironmentInjector);
 
-
-  fetchTestimonies(): Observable<Testimony[]> {
+  fetchTestimonies(id:string | null, type:string | null): Observable<Testimony[]> {
     return runInInjectionContext(this.environmentInjector, () => {
       const firestore = inject(AngularFirestore);
 
       const collection = firestore.collection<Omit<Testimony, 'id'>>(
         this.storageKey,
-        ref => ref.where('status', '==', ArticleStatus.Published)
-      );
-
-      return collection.get({source: 'cache'}).pipe(
-        switchMap(snapshot => {
-          if (snapshot.empty) {
-            return collection.get({source: 'server'});
-          } else {
-            return of(snapshot);
+        ref => {
+          let query = ref.where('status', '==', ArticleStatus.Published);
+          if (type=='audio') {
+            query = query.where('audio', '!=', null);
           }
-        }),
-        map(snapshot => {
-          return snapshot.docs.map(doc => {
-            const id = doc.id;
-            return Testimony.fromJSON({id, ...doc.data()});
-          });
-        })
-      );
-    });
-  }
-
-  fetchAudioTestimonies(id:string): Observable<Testimony[]> {
-    return runInInjectionContext(this.environmentInjector, () => {
-      const firestore = inject(AngularFirestore);
-
-      const collection = firestore.collection<Omit<Testimony, 'id'>>(
-        this.storageKey,
-        ref => ref
-          .where('status', '==', ArticleStatus.Published)
-          .where('audio', '!=', null)
+          if (type=='text') {
+            query = query.where('audio', '==', null);
+          }
+          return query;
+        }
       );
 
       return collection.get({source: 'cache'}).pipe(

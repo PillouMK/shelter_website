@@ -28,9 +28,10 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: ShelterPreset,
         options: {
+          darkModeSelector: '.fake-dark-selector',
           cssLayer: {
             name: 'primeng',
-            order: 'theme, base, primeng'
+            order: 'theme, base, primeng',
           }
         }
       }

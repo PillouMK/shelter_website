@@ -1,5 +1,5 @@
 <div class="bg-background">
-  <div class="pt-35 mb-20">
+  <div class="pt-35" #targetElementId>
     <app-page-header
       *ngIf="testimony"
       [title]="testimony.title"
@@ -7,24 +7,35 @@
       [image_number]="1"
     ></app-page-header>
   </div>
-  <div class="w-full px-40 ">
+  <div *ngIf="testimony && testimony.audio_url" class="w-full px-40 mt-20">
     <app-audio-player
-      *ngIf="testimony && testimony.audio_url"
       [audio_url]="testimony.audio_url"
       [audio_title]="testimony.title"
       orientation="horizontal"
     ></app-audio-player>
   </div>
-  <h1 class="text-secondary text-4xl font-bold w-full text-center mt-20">D’autres témoignages audios poignants</h1>
-  <p-carousel [value]="audioTestimonies" [numVisible]="6" [numScroll]="1" [responsiveOptions]="responsiveOptions" styleClass="mx-40">
+  <div *ngIf="testimony && !testimony.audio_url">
+    <app-article-content
+      [card_title]="testimony.author"
+      [card_content]="testimony.content"
+    ></app-article-content>
+  </div>
+  <h1 class="text-secondary text-4xl font-bold w-full text-center mt-20">
+    {{testimony && testimony.audio_url ?
+    "D’autres témoignages audios poignants" :
+    "D’autres témoignages poignants"
+    }}
+  </h1>
+  <p-carousel [value]="testimonies" [numVisible]="6" [numScroll]="1" [responsiveOptions]="responsiveOptions" styleClass="mx-40">
     <ng-template let-testimony #item>
-      <div class="w-full flex justify-center">
-        <app-audio-player
-          *ngIf="testimony && testimony.audio_url"
-          [audio_url]="testimony.audio_url"
-          [audio_title]="testimony.title"
-          orientation="vertical"
-        ></app-audio-player>
+      <div class="w-full flex justify-center mb-35">
+        <app-card
+          [card_title]="testimony.title"
+          [card_content]="testimony.summary"
+          [date]="testimony.updated_at"
+          [type]="testimony.audio_url ? 'audio' :'text'"
+          (click)="goToId(testimony.id)"
+        ></app-card>
       </div>
     </ng-template>
   </p-carousel>
