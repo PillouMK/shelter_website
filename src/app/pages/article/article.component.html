@@ -1,0 +1,41 @@
+<div class="bg-background" id="target">
+  <div class="pt-35">
+    <app-page-header
+      *ngIf="article"
+      [title]="article.title"
+      [description]="article.summary"
+      [image_number]="1"
+    ></app-page-header>
+  </div>
+  <div *ngIf="article && getAudioUrl(article) != ''" class="w-full px-40 mt-20 justify-center">
+    <app-audio-player
+      [audio_url]="getAudioUrl(article)"
+      [audio_title]="article.title"
+    ></app-audio-player>
+  </div>
+  <div *ngIf="article && getAudioUrl(article) == ''">
+    <app-article-content
+      [card_title]="article.author"
+      [card_content]="article.content"
+    ></app-article-content>
+  </div>
+  <h1 class="text-secondary text-4xl font-bold w-full text-center mt-20">
+    {{article && getAudioUrl(article) != '' ?
+    "D’autres témoignages audios poignants" :
+    "D’autres témoignages poignants"
+    }}
+  </h1>
+  <p-carousel [value]="articles" [numVisible]="3" [numScroll]="1" [responsiveOptions]="responsiveOptions" styleClass="sm:mx-40 mx-0">
+    <ng-template let-article #item>
+      <div class="w-full flex justify-center mb-35">
+        <app-card
+          [card_title]="article.title"
+          [card_content]="article.summary"
+          [date]="article.updated_at"
+          [type]="article.audio_url ? 'audio' :'text'"
+          (click)="changeCard(article.id)"
+        ></app-card>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>

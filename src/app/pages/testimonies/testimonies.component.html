@@ -1,54 +1,60 @@
-<div class="pt-35">
-  <app-page-header
-    title="Témoignages"
-    description="Découvrez des témoignages poignants et des histoires inspirantes de femmes qui ont surmonté des violences sur notre page d'actualités."
-    [image_number]="1"
-  ></app-page-header>
-</div>
-<h1 class="text-secondary text-4xl font-bold w-full text-center mt-20">Votre voix compte : brisez le silence et témoignez des violences que vous avez subies.</h1>
-<div class="flex w-full justify-center gap-10 bg-background">
-
-  <div class="flex flex-col mt-20">
-    <div *ngFor="let testimony of col1">
-      <app-card
-        [card_title]="testimony.title"
-        [card_content]="testimony.summary"
-        [date]="testimony.updated_at"
-        [type]="testimony.audio_url ? 'audio' :'text'"
-        (click)="goToId(testimony.id)"
-      ></app-card>
-    </div>
+<div class="bg-background">
+  <div class="pt-35">
+    <app-page-header
+      title="Témoignages"
+      description="Découvrez des témoignages poignants et des histoires inspirantes de femmes qui ont surmonté des violences sur notre page d'actualités."
+      [image_number]="1"
+    ></app-page-header>
   </div>
+  <h1 class="text-secondary text-4xl mx-10 font-bold text-center mt-20">Votre voix compte : brisez le silence et témoignez des violences que vous avez subies.</h1>
+  <div class="flex flex-wrap w-full justify-center gap-10 bg-background">
 
-  <div class="flex flex-col">
-    <div *ngFor="let item of col2">
-      <app-card
-        *ngIf="!isStat(item)"
-        [card_title]="item.title"
-        [card_content]="item.summary"
-        [date]="item.updated_at"
-        [type]="item.audio_url ? 'audio':'text'"
-        (click)="goToId(item.id)"
-      ></app-card>
-      <img
-        *ngIf="isStat(item)"
-        [src]="item.image"
-        [alt]="item.name"
-        class="rounded-3xl w-72 h-72 shadow-lg flex mt-20"
-      />
+    <div class="flex flex-col mt-20">
+      <div *ngFor="let testimony of col1">
+        <app-card
+          [card_title]="testimony.title"
+          [card_content]="testimony.summary"
+          [date]="testimony.updated_at"
+          [type]="testimony.audio_url ? 'audio' :'text'"
+          [avatar_url]="testimony.image"
+          (click)="cardUtils.goToId(testimony.id, 'testimonies')"
+        ></app-card>
+      </div>
     </div>
-  </div>
 
-  <div class="flex flex-col mt-20">
-    <div *ngFor="let testimony of col3">
-      <app-card
-        [card_title]="testimony.title"
-        [card_content]="testimony.summary"
-        [date]="testimony.updated_at"
-        [type]="testimony.audio_url ? 'audio':'text'"
-        (click)="goToId(testimony.id)"
-      ></app-card>
+    <div class="flex flex-col">
+      <div *ngFor="let item of col2">
+        <app-card
+          *ngIf="!isStat(item)"
+          [card_title]="item.title"
+          [card_content]="item.summary"
+          [date]="item.updated_at"
+          [type]="item.audio_url ? 'audio':'text'"
+          [avatar_url]="item.image"
+          (click)="cardUtils.goToId(item.id, 'testimonies')"
+        ></app-card>
+        <img
+          *ngIf="isStat(item)"
+          [src]="item.image"
+          [alt]="item.name"
+          class="rounded-3xl w-72 h-72 shadow-lg flex mt-20"
+        />
+      </div>
     </div>
+
+    <div class="flex flex-col mt-20">
+      <div *ngFor="let testimony of col3">
+        <app-card
+          [card_title]="testimony.title"
+          [card_content]="testimony.summary"
+          [date]="testimony.updated_at"
+          [type]="testimony.audio_url ? 'audio':'text'"
+          [avatar_url]="testimony.image"
+          (click)="cardUtils.goToId(testimony.id,'testimonies')"
+        ></app-card>
+      </div>
+    </div>
+
   </div>
 
 </div>

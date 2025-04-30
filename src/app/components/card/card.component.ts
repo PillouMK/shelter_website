@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import { CardModule } from 'primeng/card';
 import {Avatar} from 'primeng/avatar';
@@ -20,7 +20,10 @@ export class CardComponent {
   @Input({required: false}) showContent: boolean = true;
   @Input({required: false}) type: string = 'text'; // text | audio
   @Input({required: false}) avatar: number = 0;
+  @Input({required: false}) avatar_url: string | null = null;
   @Input({required: false}) card_title: string = "Titre de l'article";
   @Input({required: false}) card_content: string = "Contenu de l'article";
   @Input({required: true}) date!: Date;
+
+
 }

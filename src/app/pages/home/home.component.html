@@ -1,4 +1,21 @@
-<div class="pt-35">
-  <app-hero-section></app-hero-section>
+<div class="bg-background">
+  <div class="pt-35">
+    <app-hero-section></app-hero-section>
+  </div>
+  <h1 class="text-secondary text-4xl font-bold w-full text-center mt-20">She’lter vous aide face aux violences</h1>
+  <p-carousel [value]="articles" [numVisible]="3" [numScroll]="1" [responsiveOptions]="responsiveOptions" styleClass="sm:mx-40 mx-0">
+    <ng-template let-article #item>
+      <div class="w-full flex justify-center mb-35">
+        <app-card
+          [card_title]="article.title"
+          [card_content]="article.summary"
+          [avatar_url]="article.image"
+          [date]="article.updated_at"
+          [type]="article.audio_url ? 'audio':'text'"
+          (click)="cardUtils.goToId(article.id, isNews(article) ? 'news': 'testimonies')"
+        ></app-card>
+      </div>
+    </ng-template>
+  </p-carousel>
 </div>
-<h1 class="text-secondary text-4xl font-bold w-full text-center mt-20">She’lter vous aide face aux violences</h1>
+

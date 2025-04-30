@@ -2,7 +2,8 @@ import { Routes } from '@angular/router';
 import {HomeComponent} from './pages/home/home.component';
 import {NewsComponent} from './pages/news/news.component';
 import {TestimoniesComponent} from './pages/testimonies/testimonies.component';
-import {TestimonyComponent} from './pages/testimony/testimony.component';
+import {ArticleComponent} from './pages/article/article.component';
+import {ContactComponent} from './pages/contact/contact.component';
 
 export const routes: Routes = [
   {
@@ -11,7 +12,16 @@ export const routes: Routes = [
   },
   {
     path: 'news',
-    component: NewsComponent
+    children: [
+      {
+        path: '',
+        component: NewsComponent
+      },
+      {
+        path: ':newsId',
+        component: ArticleComponent
+      }
+    ]
   },
   {
     path: 'testimonies',
@@ -22,10 +32,13 @@ export const routes: Routes = [
       },
       {
         path: ':testimonyId',
-        component: TestimonyComponent
+        component: ArticleComponent
       }
     ]
   },
-
+  {
+    path: 'contact',
+    component: ContactComponent
+  },
 
 ];

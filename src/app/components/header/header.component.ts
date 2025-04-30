@@ -55,12 +55,12 @@ export class HeaderComponent implements OnInit  {
         routerLink: '/testimonies'
       },
       {
-        label: 'Aides',
-        routerLink: '/help'
-      },
-      {
         label: 'A propos',
         routerLink: '/about'
+      },
+      {
+        label: 'Contact',
+        routerLink: '/contact'
       }
     ]
   }

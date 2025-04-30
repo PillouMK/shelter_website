@@ -12,7 +12,7 @@ export class News {
   status: ArticleStatus;
   created_at: Date;
   updated_at: Date;
-  published_at: Date | null;
+  published_at: Date;
 
   constructor(
     id: string,
@@ -24,7 +24,7 @@ export class News {
     status: ArticleStatus,
     created_at: Date,
     updated_at: Date,
-    published_at: Date | null = null
+    published_at: Date
   ) {
     this.id = id;
     this.title = title;
@@ -39,7 +39,6 @@ export class News {
   }
 
   static fromJSON(json: any): News {
-
     return new News(
       json.id,
       json.title,
@@ -50,7 +49,7 @@ export class News {
       json.status,
       parseDate(json.created_at),
       parseDate(json.updated_at),
-      json.published_at ? parseDate(json.published_at) : null
+      parseDate(json.published_at)
     );
   }
 }

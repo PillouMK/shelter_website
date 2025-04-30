@@ -5,17 +5,20 @@
     shape="circle"
   />
 </div>
-<div class="bg-background px-40">
-  <p-card styleClass="pt-20">
-    <ng-template #title>
+<div class="w-full flex justify-center">
+  <div class="bg-background w-[80%]">
+    <p-card styleClass="pt-20">
+      <ng-template #title>
       <span class="font-bold w-full flex justify-center text-sm text-black">
         {{card_title}}
       </span>
-    </ng-template>
-    <ng-template #content>
-      <div class="px-20 py-10">
-        <markdown ngPreserveWhitespaces class="prose" [data]="card_content"></markdown>
-      </div>
-    </ng-template>
-  </p-card>
+      </ng-template>
+      <ng-template #content>
+        <div class="px-10 sm:px-20 py-10">
+          <markdown ngPreserveWhitespaces class="prose" [data]="card_content"></markdown>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+
 </div>

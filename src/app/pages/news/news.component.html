@@ -1,8 +1,33 @@
-<div class="pt-35">
-  <app-page-header
-    title="Actualités"
-    description="Restez informé(e) des dernières actualités concernant la lutte contre les violences faites aux femmes : initiatives récentes, événements, avancées législatives et actions communautaires qui font la différence."
-  ></app-page-header>
+<div class="bg-background">
+  <div class="pt-35">
+    <app-page-header
+      title="Actualités"
+      description="Restez informé(e) des dernières actualités concernant la lutte contre les violences faites aux femmes : initiatives récentes, événements, avancées législatives et actions communautaires qui font la différence."
+    ></app-page-header>
+  </div>
+  <h1 class="text-secondary text-4xl font-bold w-full text-center mt-20">Que ce passe t’il en ce moment ? </h1>
+  <div class="flex flex-wrap w-full justify-center bg-background">
+    <div *ngFor="let my_news of news" class="mt-10">
+      <app-card
+        class="sm:hidden block"
+        [card_title]="my_news.title"
+        [card_content]="my_news.summary"
+        [date]="my_news.updated_at"
+        [avatar_url]="my_news.image"
+        (click)="cardUtils.goToId(my_news.id,'news')"
+      ></app-card>
+      <app-card
+        class="xl:block hidden"
+        [card_title]="my_news.title"
+        [card_content]="my_news.summary"
+        [date]="my_news.updated_at"
+        [avatar_url]="my_news.image"
+        orientation="horizontal"
+        (click)="cardUtils.goToId(my_news.id,'news')"
+      ></app-card>
+    </div>
+  </div>
+  <div class="justify-center flex">
+    <p-button styleClass="bg-secondary mt-10" label="Afficher plus" (click)="loadMore()" />
+  </div>
 </div>
-<h1 class="text-secondary text-4xl font-bold w-full text-center mt-20">Que ce passe t’il en ce moment ? </h1>
-

@@ -1,6 +1,6 @@
 <div class="bg-white text-secondary w-full flex h-full items-start text-center 2xl:text-left justify-center">
-  <div class="h-full items-start px-20 pt-20">
-    <h1 class="font-extrabold text-5xl ">{{ title }}</h1>
+  <div class="h-full items-start px-20 pt-20 2xl:pb-0 pb-20">
+    <h1 class="font-extrabold text-5xl line-clamp-1 ">{{ title }}</h1>
     <p class="leading-none font-normal text-xl mt-3 text-black">{{description}}</p>
   </div>
   <img *ngIf="image_number == 0" src="/assets/img/six-women-circle.svg" class="hidden 2xl:block h-72 mr-10"/>
