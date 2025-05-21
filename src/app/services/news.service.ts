@@ -13,7 +13,7 @@ export class NewsService {
   private readonly storageKey = 'news';
   private environmentInjector  = inject(EnvironmentInjector);
 
-  fetchNews(id:string | null, limit:number): Observable<News[]> {
+  fetchNews(id: string | null, limit: number, searchTerm: string | null): Observable<News[]> {
     return runInInjectionContext(this.environmentInjector, () => {
       const firestore = inject(AngularFirestore);
 
@@ -22,11 +22,9 @@ export class NewsService {
         ref => {
           let query = ref
             .where('status', '==', ArticleStatus.Published);
-
           if (limit > 0) {
             query = query.limit(limit);
           }
-
           return query;
         }
       );
@@ -40,10 +38,18 @@ export class NewsService {
           }
         }),
         map(snapshot => {
-          return snapshot.docs.map(doc => {
+          let results = snapshot.docs.map(doc => {
             const id = doc.id;
             return News.fromJSON({id, ...doc.data()});
-          }).filter(news => news.id !== id);
+          }).filter(testimony => testimony.id !== id);
+
+          if (searchTerm && searchTerm.trim().length > 0) {
+            const term = searchTerm.toLowerCase();
+            results = results.filter(news =>
+              news.title && news.title.toLowerCase().includes(term)
+            );
+          }
+          return results;
         })
       );
     });
@@ -52,7 +58,7 @@ export class NewsService {
   getNewsById(id: string): Observable<News | null> {
     return runInInjectionContext(this.environmentInjector, () => {
         const firestore = inject(AngularFirestore);
-        const docRef = firestore.doc<Omit<Testimony, 'id'>>(`${this.storageKey}/${id}`);
+        const docRef = firestore.doc<Omit<News, 'id'>>(`${this.storageKey}/${id}`);
 
       return docRef.get({source: 'cache'}).pipe(
         switchMap(doc => {

@@ -40,7 +40,7 @@ export class TestimoniesComponent implements OnInit {
   }
 
   loadTestimonies() {
-    this.service.fetchTestimonies(null,null).subscribe({
+    this.service.fetchTestimonies(null,null,null).subscribe({
       next: (testimonies:Testimony[]) => {
         console.log(testimonies);
         this.testimonies = testimonies;

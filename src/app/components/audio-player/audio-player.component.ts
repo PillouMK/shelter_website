@@ -13,7 +13,7 @@ import {getAvatarImage} from '../../utils/avatar.utils';
   imports: [
     Card, CommonModule, ProgressBar, Button, Avatar
   ],
-  templateUrl: './audio-player.component.html'
+  templateUrl: './audio-player.component.html',
 })
 export class AudioPlayerComponent implements AfterViewInit, OnDestroy {
   @ViewChild('waveform') waveformElement!: ElementRef;
@@ -21,6 +21,7 @@ export class AudioPlayerComponent implements AfterViewInit, OnDestroy {
   @Input({required: false}) avatar: number = 0;
   @Input({required: false}) audio_title: string = "Titre de l'audio";
   @Input({required: true}) audio_url!: string;
+
 
   wavesurfer: WaveSurfer | null = null;
   isLoading = true;

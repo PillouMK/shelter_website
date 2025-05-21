@@ -4,11 +4,16 @@ import {NewsComponent} from './pages/news/news.component';
 import {TestimoniesComponent} from './pages/testimonies/testimonies.component';
 import {ArticleComponent} from './pages/article/article.component';
 import {ContactComponent} from './pages/contact/contact.component';
+import {LegalMentionComponent} from './pages/legal-mention/legal-mention.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'legal-mention',
+    component: LegalMentionComponent
   },
   {
     path: 'news',

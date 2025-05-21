@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   ];
 
   loadTestimonies() {
-    this.testimonyService.fetchTestimonies(null, null).subscribe({
+    this.testimonyService.fetchTestimonies(null, null,null).subscribe({
       next: (testimonies: Testimony[]) => {
         this.testimonies = testimonies;
         this.mergeArticles();
@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadAllNews() {
-    this.newsService.fetchNews(null, 0).subscribe({
+    this.newsService.fetchNews(null, 0,null).subscribe({
       next: (news: News[]) => {
         this.news = news;
         this.mergeArticles();

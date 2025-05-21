@@ -1,5 +1,5 @@
 <div class="fixed w-full z-50">
-  <p-menubar [model]="items" styleClass="pr-0 mb-4">
+  <p-menubar [model]="menuItems" styleClass="pr-0 mb-4">
     <ng-template pTemplate="start">
       <img src="../../../assets/img/logo-color.svg" routerLink="/" class="w-40" alt="Logo de l'association"/>
     </ng-template>
@@ -7,15 +7,24 @@
       <p-button
         label="Quitter rapidement"
         styleClass="rounded-r-none rounded-l-full w-38 text-center bg-primary hover:bg-primary-hover active:bg-primary-active"
+        (onClick)="quitQuickly()"
       />
     </ng-template>
   </p-menubar>
-  <div
-    class="w-full flex justify-center mb-4 transition-all duration-200 ease-in-out"
-    [ngClass]="{'transform -translate-y-full opacity-0': scrollToBottom, 'transform translate-y-0 opacity-100': !scrollToBottom}">
-    <p-iconfield class="w-[30rem] mx-5 sm:mx-0">
-      <p-inputicon styleClass="pi pi-search" />
-      <input type="text" pInputText placeholder="Search" class="w-full rounded-full"/>
-    </p-iconfield>
+  <div class="w-full flex justify-center mb-4 transition-all duration-200 ease-in-out" [ngClass]="{'transform -translate-y-full opacity-0': scrollToBottom, 'transform translate-y-0 opacity-100': !scrollToBottom}">
+    <p-autocomplete
+      showClear
+      inputStyleClass="rounded-full w-[30rem]"
+      [(ngModel)]="value"
+      [suggestions]="items"
+      (completeMethod)="search($event)"
+      (onSelect)="goToArticle($event)"
+      field="title"
+      placeholder="Rechercher un article..."
+    >
+      <ng-template let-item pTemplate="item">
+        {{item.title}}
+      </ng-template>
+    </p-autocomplete>
   </div>
 </div>

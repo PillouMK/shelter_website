@@ -41,7 +41,7 @@ export class NewsComponent implements OnInit {
   }
 
   loadNews() {
-    this.service.fetchNews(null,this.limit).subscribe({
+    this.service.fetchNews(null,this.limit,null).subscribe({
       next: (news:News[]) => {
         this.news = news;
         console.log(this.news);

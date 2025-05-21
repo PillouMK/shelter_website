@@ -6,15 +6,39 @@
       description="N'hésitez pas à nous contacter pour partager votre histoire, poser des questions ou trouver du soutien. Nous sommes là pour vous écouter, vous aider et vous orienter."
     ></app-page-header>
   </div>
-  <div class="mx-40 mt-10">
+  <div class="mx-40 mt-10 gap-2 h-fit flex flex-col">
 
-    <div class="flex flex-col gap-2">
-      <label for="username">Username</label>
-      <input pInputText id="username" aria-describedby="username-help" />
-      <small id="username-help">Enter your username to reset your password.</small>
-    </div>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit($event)" class="flex flex-col gap-4">
 
+      <div class="flex flex-col gap-2">
+        <label for="name">Nom</label>
+        <input pInputText id="name" name="name" formControlName="name" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="email">Email</label>
+        <input pInputText id="email" name="email" formControlName="email" [ngClass]="{'ng-invalid ng-dirty': submitted && f['email'].errors}" />
+        <small *ngIf="submitted && f['email'].errors?.['required']" class="text-red-500">Veuillez saisir votre email</small>
+        <small *ngIf="submitted && f['email'].errors?.['email']" class="text-red-500">Veuillez saisir un email valide</small>
+      </div>
+
+
+      <div class="flex flex-col gap-2">
+        <label for="message">Message</label>
+        <textarea id="message" name="message"  rows="10" pTextarea formControlName="message" [ngClass]="{'ng-invalid ng-dirty': submitted && f['message'].errors}"></textarea>
+        <small *ngIf="submitted && f['message'].errors?.['required']" class="text-red-500">Veuillez saisir votre message</small>
+        <small *ngIf="submitted && f['message'].errors?.['minlength']" class="text-red-500">Le message doit contenir au moins 10 caractères</small>
+      </div>
+
+      <div class="flex justify-between mt-5">
+        <div class="flex flex-col gap-2">
+          <span class="pi pi-home text-secondary"> Nantes</span>
+          <span class="pi pi-at text-secondary"> ShelterADF44&#64;gmail.com</span>
+        </div>
+        <p-button type="submit" styleClass="bg-secondary" label="Envoyer"></p-button>
+      </div>
+    </form>
 
   </div>
-
 </div>
+<p-toast position="bottom-center" />

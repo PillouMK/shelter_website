@@ -8,5 +8,10 @@ export const environment = {
     messagingSenderId: "203677500824",
     appId: "1:203677500824:web:e858c395c95c23a84a17ed",
     measurementId: "G-E9RT1DJF0K"
+  },
+  mailjs: {
+    serviceId: "service_fqxcd9y",
+    templateId: "template_rf1eazt",
+    publicKey: "B_w4ljSPaiXs8fLGJ",
   }
 };

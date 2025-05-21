@@ -11,6 +11,7 @@ import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {enableIndexedDbPersistence, getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {FIREBASE_OPTIONS} from '@angular/fire/compat';
 import { provideMarkdown } from 'ngx-markdown';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 const app = initializeApp(environment.firebase);
 
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideMarkdown(),
     provideFirebaseApp(() => app),
+    provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore(app)),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     provideZoneChangeDetection({ eventCoalescing: true }),

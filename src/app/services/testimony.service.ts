@@ -12,7 +12,7 @@ export class TestimonyService {
   private readonly storageKey = 'testimony';
   private environmentInjector  = inject(EnvironmentInjector);
 
-  fetchTestimonies(id:string | null, type:string | null): Observable<Testimony[]> {
+  fetchTestimonies(id:string | null, type:string | null, searchTerm: string | null): Observable<Testimony[]> {
     return runInInjectionContext(this.environmentInjector, () => {
       const firestore = inject(AngularFirestore);
 
@@ -39,10 +39,18 @@ export class TestimonyService {
           }
         }),
         map(snapshot => {
-          return snapshot.docs.map(doc => {
+          let results = snapshot.docs.map(doc => {
             const id = doc.id;
             return Testimony.fromJSON({id, ...doc.data()});
           }).filter(testimony => testimony.id !== id);
+
+          if (searchTerm && searchTerm.trim().length > 0) {
+            const term = searchTerm.toLowerCase();
+            results = results.filter(news =>
+              news.title && news.title.toLowerCase().includes(term)
+            );
+          }
+          return results;
         })
       );
     });

@@ -103,7 +103,7 @@ export class ArticleComponent implements OnInit {
   loadTestimonies(id:string) {
     if(this.article instanceof Testimony){
       const type = this.article?.audio_url ? 'audio': 'text';
-      this.testimonyService.fetchTestimonies(id,type).subscribe({
+      this.testimonyService.fetchTestimonies(id,type,null).subscribe({
         next: (testimony:Testimony[]) => {
           this.articles = testimony;
         },
@@ -115,7 +115,7 @@ export class ArticleComponent implements OnInit {
   }
 
   loadAllNews(id:string) {
-    this.newsService.fetchNews(id,0).subscribe({
+    this.newsService.fetchNews(id,0,null).subscribe({
       next: (news:News[]) => {
         this.articles = news;
       },
